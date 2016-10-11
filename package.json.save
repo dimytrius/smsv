@@ -1,0 +1,26 @@
+{
+  "name": "SMSV",
+  "version": "0.0.0",
+  "description": "SMSV - Sistema de monitoramento de sinais vitais",
+  "private": false,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "cookie-parser": "^1.4.0",
+    "ejs": ">2.3.3",
+    "express": "^5.0.0-alpha.2",
+    "express-load": "^1.1.15",
+    "express-session": "^1.12.1",
+    "method-override": "^2.3.5",
+    "serve-favicon": "~2.3.0",
+    "socket.io": "^1.4.5",
+    "serialport":", serialport = require("serialport")
+    , SerialPort = serialport.SerialPort
+    , mySerial = new  SerialPort("/dev/rfcomm0", {
+      bauderate: 9600,
+        parser: serialport.parsers.readline("\n")
+      })",	
+  }
+}

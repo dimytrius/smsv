@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+    Autor: Mario Pérez Esteso <mario@geekytheory.com>
+    Web: geekytheory.com
+-->
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width" />
+    <title>
+        Raspberry Pi Status
+    </title>
+    <!-- Importo el módulo socket.io que tengo en el proyecto -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+    <!-- Importo el archivo Javascript de Highcharts directamente desde su servidor -->
+     
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+    </head>
+<body>
+            <script src="js/dark-green.js"></script>
+    <div id="chart"></div>
+    <script>
+    // // Creo un WebSocket. ¡Poned la IP de vuestra Raspberry Pi! 
+     var socket = io();
+    // // Creo un nuevo objeto 'Chart'
+     var chart;
+     chart = new Highcharts.Chart({
+         chart: {
+            type: 'spline',
+             animation: Highcharts.svg, // don't animate in old IE
+             renderTo: 'chart', 
+             //defaultSeriesType: 'spline',
+             events: {
+                 load: function() {
+                     // Cada vez que reciba un valor desde el socket, lo meto en la gráfica
+                     socket.on('dadoArduino', function (dado) {
+
+                         var series = chart.series[0];
+                         var x = new Date().getTime(),
+                             y = parseFloat(dado.valor);
+                         series.addPoint([x, y], true, true);
+                        
+                     });
+                 }
+             }
+         },
+         
+
+         title: {
+             text: 'ECG'
+         },
+         
+         yAxis: {
+             minPadding: 1024,
+             maxPadding: 0,
+             title: {
+                 text: 'BPM',
+                 margin: 40
+             }
+         },
+         xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150
+            },
+         series: [{
+                name: 'Random data',
+                data: (function () {
+                    // generate an array of random data
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+
+                    for (i = -40; i <= 0; i += 1) {
+                        data.push({
+                            x: time + i * 1000,
+                            y: 0
+                        });
+                    }
+                    return data;
+                }())
+            }]
+     });
+    </script>
+</body>
+</html>
