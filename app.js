@@ -8,14 +8,13 @@ var express = require('express')
     , http = require('http').Server(app)
     , io = require('socket.io')(http)
     , mySocket
-    , serialport = require('serialport')
+    //, serialport = require('serialport')
     , mongoose = require('mongoose')
-    , mySerial = new serialport("/dev/ttyUSB0", {
-      baudrate: 9600,
-        parser: serialport.parsers.readline("\n")
-
-      })
-    ;
+//    , mySerial = new serialport("/dev/ttyUSB0", {
+//      baudrate: 9600,
+//        parser: serialport.parsers.readline("\n")
+//
+//      });
 mongoose.Promise = global.Promise;
 
 global.db = mongoose.connect('mongodb://localhost:27017/SMSV');
@@ -29,20 +28,20 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public'));
 
-mySerial.on("open", function(){
-  console.log("Porta aberta.");
-});
-
-mySerial.on("data", function(dado){
-  //console.log(dado);
-  io.emit("dadoArduino", {
-    valor: dado
-      });
-});
-
-io.on("connction", function(socket){
-  console.log("um usuario esta conectado!");
-});
+//mySerial.on("open", function(){
+//  console.log("Porta aberta.");
+//});
+//
+//mySerial.on("data", function(dado){
+//  //console.log(dado);
+//  io.emit("dadoArduino", {
+//    valor: dado
+//      });
+//});
+//
+//io.on("connction", function(socket){
+//  console.log("um usuario esta conectado!");
+//});
 
 
 load('models')
