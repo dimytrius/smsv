@@ -15,7 +15,7 @@ module.exports = function(app) {
 	var usuario = Schema({
 		nome: {type: String, required:true},
 		email: {type: String, required:true},
-		//senha: {type: String, required:true},
+		senha: {type: String, required:true},
 		pacientes: [paciente]
 	});
 
