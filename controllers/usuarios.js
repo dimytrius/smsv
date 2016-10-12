@@ -1,27 +1,19 @@
 module.exports = function(app){
 	var Usuario = app.models.usuario;
 
-	var ContatosController = {
+	var UsuariosController = {
 		index: function(req, res){
-			var _id = req.session.usuario._id;
-			Usuario.findById(_id, function(erro,usuario){
-				var contatos = usuario.contatos;
-				var resultado = { contatos: contatos };
-				res.render('contatos/index', resultado);
-			});
 		},
 
 		create :function(req, res){
-			var _id = req.body.contato._id;
-
-			Usuario.findById(_id, function(erro, usuario){
-				var contato = req.body.contato;
-				console.log(contato);
-				var contatos = usuario.contatos;
-				contatos.push(contato);
-				usuario.save(function() {
-					res.redirect('/contatos');
-				});	
+			console.log(req);
+			var usuario = new Usuario(req.body.usuario);
+			usuario.save(function(err) {
+				if(!err) {
+					console.log('usuario n criado');
+					res.write('usuario n criado');
+				}
+				res.write('Usuário criado!');
 			});
 		},
 
@@ -73,5 +65,5 @@ module.exports = function(app){
 			});
 		}
 	};
-	return ContatosController
+	return UsuariosController
 };

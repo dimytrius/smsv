@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<% include ../header %>
+<div class="jumbotron">
+	<div class="container">
+
+		<header>
+			<h1>SMSV</h1>
+			<h4>Cadastramento de Pacientes</h4>
+		</header>
+		<section>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Cadastrar Paciente</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+						</div>
+						<div class="modal-body">
+							<form action="/paciente" method="post">
+								<input type="text" name="paciente[nome]" placeholder="Nome">
+								<input type="text" name="paciente[email]" placeholder="E-mail">
+								<p></p>
+
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary" type="submit" role="button" >Cadastrar</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-3 sidebar">
+					<p></p>
+					<table class="table table-hover">
+						<thead>
+							<h2>Pacientes</h2>
+						</thead>
+						<tbody>
+							<!-- foreach -->
+							<% pacientes.forEach(function(paciente) { %>
+								<tr>
+									<td><a href="/paciente/<%- paciente._id %>"><%- paciente.nome %></a></td>
+									<td><a href="/monitorar">Monitorar</a></td>
+								</tr>
+							<% }) %>
+							<!-- endforeach -->
+						</tbody>
+					</table>
+				</div>
+				<!--right-->
+				<div class="col-xs-9">
+					<h2 id="sec0">Monitoramento</h2>
+
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+						<!-- Indicators -->
+						<ol class="carousel-indicators">
+							<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+							<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+						</ol>
+
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="http://placehold.it/1200x315" alt="...">
+								<div class="carousel-caption">
+									<h3>Caption Text</h3>
+								</div>
+							</div>
+							<div class="item">
+								<img src="http://placehold.it/1200x315" alt="...">
+								<div class="carousel-caption">
+									<h3>Caption Text</h3>
+								</div>
+							</div>
+							<div class="item">
+								<img src="http://placehold.it/1200x315" alt="...">
+								<div class="carousel-caption">
+									<h3>Caption Text</h3>
+								</div>
+							</div>
+						</div>
+
+						<!-- Controls -->
+						<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left"></span>
+						</a>
+						<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right"></span>
+						</a>
+					</div> 
+					<!-- Carousel -->
+				</div>
+			</div>
+		</section>
+		<% include ../exit %>
+		<% include ../footer %>	
+	</div>
+</div>

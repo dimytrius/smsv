@@ -1,18 +1,23 @@
 module.exports = function(app) {
 	var Schema = require('mongoose').Schema;
 
+	var ecg = Schema({
+		x: Number,
+		y: Number
+	});
 
-	var contato = Schema({
+	var paciente = Schema({
 		nome: String,
-		email: String
+		email: String,
+		ecg: [ecg]
 	});
 
 	var usuario = Schema({
 		nome: {type: String, required:true},
 		email: {type: String, required:true},
-		contatos: [contato]
+		//senha: {type: String, required:true},
+		pacientes: [paciente]
 	});
 
 	return db.model('usuarios',usuario);
-
 };

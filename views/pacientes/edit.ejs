@@ -1,0 +1,16 @@
+<% include ../header %>
+<header>
+	<h2>Editar Paciente</h2>
+</header>
+<section>
+	<form action="/paciente/<%- paciente._id %>?_method=put" method="post">
+		<label>Nome:</label>
+		<input type="text" name="paciente[nome]" value="<%- paciente.nome %>">
+		<label>E-mail</label>
+		<input type="text" name="paciente[email]" value="<%- paciente.email %>">	
+		<button type="submit">Atualizar</button>
+		<a href= "/paciente/<%- paciente._id%>/editar">Editar</a>
+	</form>
+</section>	
+<% include ../exit %>
+<% include ../footer %>					

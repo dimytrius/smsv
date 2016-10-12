@@ -1,0 +1,16 @@
+<% include ../header %>
+<header>
+	<h2>Dados do Paciente</h2>
+</header>
+<section>
+	<form action="/paciente/<%- paciente._id %>?_method=delete" method="post">
+	<p><label>Nome:</label><%- paciente.nome %></p>
+	<p><label>Email:</label><%- paciente.email %></p>
+	<p>
+		<button type="submit">Excluir</button>
+		<a href="/paciente/<%- paciente._id %>/editar">Editar</a>
+	</p>
+	</form>
+</section>
+<% include ../exit %>
+<% include ../footer %>	
