@@ -40,7 +40,7 @@ mySerial.on("data", function(dado){
 });
 
 io.on("connction", function(socket){
-  console.log("um usuario esta conectado!");
+  console.log("um usuario esta conectado");
 });
 
 
